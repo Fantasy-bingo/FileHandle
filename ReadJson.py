@@ -20,16 +20,17 @@ def read_json():
         print('\033[0;31;1m>>>ERROR<<<\n{}\033[0m'.format("The config.json file in the current directory doesn't "
                                                           "exist or correct, please check it first.\nThe content "
                                                           "format is shown below:"))
-        print("{")
-        print("    \"paste_path\": \"the full directory you want to paste\",")
-        print("    \"handle_path\": [")
-        print("        \"the full directory you want handle\",")
-        print("        \"the full directory you want handle\"")
-        print("    ],")
-        print("    \"postfix\": [")
-        print("        \".jpg\",")
-        print("    ]")
-        print("}")
+        print("""
+        {
+            "paste_path": "the full directory you want to paste",
+            "handle_path": [
+                "the full directory you want handle",
+                "the full directory you want handle",
+                ],
+            "postfix": [
+                ".jpg"
+                ]
+        }""")
         return False
 
 

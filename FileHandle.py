@@ -130,7 +130,7 @@ class MyFile:
 
 if __name__ == '__main__':
     config_data = read_json()
-    if not config_data:  # 判断config_ _data数据是否有效，如果无效，被调用的read_ json函数会返回False，程序直接退出
+    if not config_data:  # 判断config_data数据是否有效，如果无效，被调用的read_json函数会返回False，程序直接退出
         exit(0)
 
     handle_num = handle_choose()
@@ -140,29 +140,32 @@ if __name__ == '__main__':
         if handle_num == '1':
             print("统计文件数量")
             for filepath in myfile.handle_path:
-                print("\033[0;32;1m||{}||正在统计:【{}】\033[0m".format(getTime(), filepath), end='')
-                file_num = myfile.count_file(Path(filepath))
-                print("\033[0;32;1m【{}】文件总数量:{}\033[0m".format(filepath, str(file_num)))
+                if "" != filepath:
+                    print("\033[0;32;1m||{}||正在统计:【{}】\033[0m".format(getTime(), filepath), end='')
+                    file_num = myfile.count_file(Path(filepath))
+                    print("\033[0;32;1m【{}】文件总数量:{}\033[0m".format(filepath, str(file_num)))
 
         elif handle_num == '2':
             print("排除指定后缀类型文件拷贝")
             for handle_path in myfile.handle_path:
                 myfile.traversing_file_exclude_postfix(Path(handle_path))
+                print("\033[0;32;1m||{}||拷贝的文件保存在{}目录.\033[0m".format(getTime(), myfile.paste_path))
 
         elif handle_num == '3':
             print("包含指定后缀类型文件拷贝")
             for handle_path in myfile.handle_path:
                 myfile.traversing_file_include_postfix(Path(handle_path))
+                print("\033[0;32;1m||{}||拷贝的文件保存在{}目录.\033[0m".format(getTime(), myfile.paste_path))
 
         elif handle_num == '4':
             print("常规拷贝")
             if myfile.path_is_exist():
                 for handle_path in myfile.handle_path:
                     myfile.copy_file_normal(handle_path)
+                    print("\033[0;32;1m||{}||拷贝的文件保存在{}目录.\033[0m".format(getTime(), myfile.paste_path))
 
         endTime = time.time()
         print("\033[0;32;1m||{}||总耗时:{:.6}s\033[0m".format(getTime(), str(endTime - startTime)))
-        print("\033[0;32;1m||{}||拷贝的文件保存在{}目录.\033[0m".format(getTime(), myfile.paste_path))
 
     # 输入错误或者是0，则退出程序
     else:
